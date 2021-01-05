@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -33,7 +34,8 @@ namespace User.Controllers
         public JsonResult AjaxMethod(string response)
         {
             Recaptcha recaptcha = new Recaptcha();
-            string url = "https://www.google.com/recaptcha/api/siteverify?secret=" + recaptcha.Secret + "&response=" + response;
+            string key = ConfigurationManager.AppSettings["SecretKey"];
+            string url = "https://www.google.com/recaptcha/api/siteverify?secret=" + key + "&response=" + response;
             recaptcha.Response = (new WebClient()).DownloadString(url);
             return Json(recaptcha);
         }
@@ -79,7 +81,6 @@ namespace User.Controllers
     public class Recaptcha
     {
         public string Response { get; set; }
-        public string Secret = "6LftViEaAAAAAD2UoF8XpV4ENKj28aYwNRuTTmuD";
     }
 
 }
