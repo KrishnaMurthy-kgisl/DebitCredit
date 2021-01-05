@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using User.Models;
@@ -27,6 +28,14 @@ namespace User.Controllers
                 return RedirectToAction("Home");
             }
             return View(usr);
+        }
+        [HttpPost]
+        public JsonResult AjaxMethod(string response)
+        {
+            Recaptcha recaptcha = new Recaptcha();
+            string url = "https://www.google.com/recaptcha/api/siteverify?secret=" + recaptcha.Secret + "&response=" + response;
+            recaptcha.Response = (new WebClient()).DownloadString(url);
+            return Json(recaptcha);
         }
         public string Home()
         {
@@ -65,6 +74,12 @@ namespace User.Controllers
             userAgent = userAgent.ToLower();
             return mobileDevices.Any(x => userAgent.Contains(x));
         }
+    }
+
+    public class Recaptcha
+    {
+        public string Response { get; set; }
+        public string Secret = "6LftViEaAAAAAD2UoF8XpV4ENKj28aYwNRuTTmuD";
     }
 
 }

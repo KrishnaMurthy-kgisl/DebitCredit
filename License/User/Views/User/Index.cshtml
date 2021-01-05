@@ -5,6 +5,21 @@
 }
 
 @*<h2>Index</h2>*@
+
+<style type="text/css">
+    body {
+        font-family: Arial;
+        font-size: 10pt;
+    }
+
+    .error {
+        color: red;
+    }
+</style>
+<body>
+</body>
+
+
 <div style="font-family:Arial">
 
     @using (Html.BeginForm())
@@ -31,13 +46,62 @@
                 </div>
             </div>
 
+            <div id="dvCaptcha">
+            </div>
+            <input type="hidden" id="hfCaptcha" />
+            <span id="rfvCaptcha" class="error" style="display:none">Captcha validation is required.</span>
+            <br />
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="LogIn" class="btn btn-default" />
+                    <input type="submit" value="LogIn" id="btnSubmit" class="btn btn-default" />
                 </div>
             </div>
+            <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+            <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+                    async defer></script>
+            <script type="text/javascript">
+
+       var onloadCallback = function () {
+            grecaptcha.render('dvCaptcha', {
+                'sitekey': '6LftViEaAAAAAOUSXKsLNNsQJctGv44nPqjRiCBl',
+                'callback': function (response) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/User/AjaxMethod",
+                        data: "{response: '" + response + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (r) {
+                            var captchaResponse = jQuery.parseJSON(r.Response);
+                            if (captchaResponse.success) {
+                                $("#hfCaptcha").val(captchaResponse.success);
+                                $("#rfvCaptcha").hide();
+                            } else {
+                                $("#hfCaptcha").val("");
+                                $("#rfvCaptcha").show();
+                                var error = captchaResponse["error-codes"][0];
+                                $("#rfvCaptcha").html("RECaptcha error. " + error);
+                            }
+                        }
+                    });
+                }
+            });
+        };
+        $(function () {
+            $("#btnSubmit").click(function ()
+            {
+                $("#rfvCaptcha").hide();
+                if ($("#hfCaptcha").val() == "") {
+                    $("#rfvCaptcha").show();
+                    return false;
+                }
+            });
+        });
+            </script>
+
         </div>
     }
+
 
 </div>
 @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
