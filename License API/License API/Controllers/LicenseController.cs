@@ -28,5 +28,30 @@ namespace License_API.Controllers
             var result = l_services.LogOff(licenseInputModel);
             return result;
         }
+
+        [HttpPost]
+        [Route("KeepAlive")]
+        public object KeepAlive([FromBody] LicenseInputModel licenseInputModel)
+        {
+            var result = l_services.KeepAlive(licenseInputModel);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("SessionExpire")]
+        public object SessionExpire(string ProductKey)
+        {
+            var result = l_services.SessionExpire(ProductKey);
+            return result;
+        }
+
+        [HttpGet]
+        [Route("GetAllLggedUser")]
+        public object GetAllLggedUser(string ProductKey)
+        {
+            var result = l_services.GetAllLggedUser(ProductKey);
+            return result;
+        }
+
     }
 }

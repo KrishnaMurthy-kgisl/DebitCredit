@@ -3,46 +3,177 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using License_API.Models;
+using License_API.Models.License;
 using License_API.Repository;
 using License_API.UnitofWork;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace License_API.Services
 {
     public class LicenseServices
     {
-        LicenseRepository l_repo = new LicenseRepository();
-        public string Login(LicenseInputModel licenseInputModel)
+        private LicenseRepository l_repo;
+        private LicenseResponseModel response = new LicenseResponseModel();
+        public object Login(LicenseInputModel licenseInputModel)
         {
-            string ErrMsg = validateCrdential(licenseInputModel.Login_ID, licenseInputModel.Password);
-            if (ErrMsg == String.Empty)
+            l_repo = new LicenseRepository(licenseInputModel.Product_Key);
+            string ErrMsg = string.Empty;
+            if (l_repo.ProductKey != "")
             {
-                l_repo.SaveLogin(licenseInputModel);
+                if (validateCrdential(licenseInputModel.Login_ID, licenseInputModel.Password, out ErrMsg))
+                {
+                    if (validateLicense(licenseInputModel, out ErrMsg))
+                    {
+                        l_repo.SaveLogin(licenseInputModel);
+                        response.status_Description = "Successfully Logged In";
+                        response.status_code = "1";
+                    }
+                    else
+                    {
+                        response.status_Description = ErrMsg;
+                        response.status_code = "0";
+                    }
+                }
+                else
+                {
+                    response.status_Description = ErrMsg;
+                    response.status_code = "0";
+                }
             }
-            return ErrMsg;
+            else
+            {
+                response.status_Description = "Invalid Product Key";
+                response.status_code = "0";
+            }
+            return Result(response);
         }
 
-        public string LogOff(LicenseInputModel licenseInputModel)
+        public object LogOff(LicenseInputModel licenseInputModel)
         {
-            l_repo.LogOff(licenseInputModel);
-            return "Successfully Logged Out";
+            string ErrMsg = string.Empty;
+            l_repo = new LicenseRepository(licenseInputModel.Product_Key);
+            if (l_repo.ProductKey != "")
+            {
+                l_repo.LogOff(licenseInputModel);
+                response.status_Description = "Successfuly Logged Off";
+                response.status_code = "1";
+            }
+            else
+            {
+                response.status_Description = "Invalid Product Key";
+                response.status_code = "0";
+            }
+            return Result(response);
         }
 
-        private string validateCrdential(string loinId, string Password)
+        public object KeepAlive(LicenseInputModel licenseInputModel)
         {
-            LICENSE_USER l_user = l_repo.GetUser(loinId);
-            string ErrorMsg = string.Empty;
-
-            //Need to check the Username validd
-
-            //Need to check the Password
-
-            return ErrorMsg;
+            string ErrMsg = string.Empty;
+            l_repo = new LicenseRepository(licenseInputModel.Product_Key);
+            if (l_repo.ProductKey != "")
+            {
+                l_repo.LogOff(licenseInputModel);
+                response.status_Description = "Successfuly Session Extended";
+                response.status_code = "1";
+            }
+            else
+            {
+                response.status_Description = "Invalid Product Key";
+                response.status_code = "0";
+            }
+            return Result(response);
         }
 
-        private bool validateCrdential(LicenseInputModel licenseInputModel)
+        public object SessionExpire(string Product_Key)
         {
+            string ErrMsg = string.Empty;
+            int NoOfUsersExpired;
+            l_repo = new LicenseRepository(Product_Key);
+            if (l_repo.ProductKey != "")
+            {
+                l_repo.SessionExpire(out NoOfUsersExpired);
+                response.status_Description = "Successfuly session expired users(" + NoOfUsersExpired.ToString() + ") are killed";
+                response.status_code = "1";
+            }
+            else
+            {
+                response.status_Description = "Invalid Product Key";
+                response.status_code = "0";
+            }
+            return Result(response);
+        }
+
+        public object GetAllLggedUser(string Product_Key)
+        {
+            string ErrMsg = string.Empty;
+            l_repo = new LicenseRepository(Product_Key);
+            if (l_repo.ProductKey != "")
+            {
+                var allUser = l_repo.GetAllActiveLoggedUser();
+                if (allUser != null && allUser.Count > 0)
+                {
+                    return allUser;
+                }
+                else
+                {
+                    response.status_code = "1";
+                    response.status_Description = "No Records";
+                }
+            }
+            else
+            {
+                response.status_Description = "Invalid Product Key";
+                response.status_code = "0";
+            }
+            return Result(response);
+        }
+
+        private bool validateCrdential(string loginId, string Password, out string ErrorMsg)
+        {
+            LICENSE_USER l_user = l_repo.GetUser(loginId);
+            ErrorMsg = string.Empty;
+
+            if (l_user == null)
+            {
+                ErrorMsg = "Invalid User Name";
+                return false;
+            }
+            else
+            {
+                if (l_user.PASSWORD != Password)
+                {
+                    ErrorMsg = "Invalid Password";
+                    return false;
+                }
+            }
             return true;
         }
 
+        private bool validateLicense(LicenseInputModel licenseInputModel, out string ErrorMsg)
+        {
+            ErrorMsg = string.Empty;
+            List<LICENSE_LOG_HISTORY> lst = new List<LICENSE_LOG_HISTORY>();
+            lst = l_repo.GetAllActiveLoggedUser();
+            if (lst.Count < l_repo.LicenseNoOfUsers)
+            {
+                return true;
+            }
+            else
+            {
+                ErrorMsg = "Total number of logged users reached License. Kindly contact admin.";
+                return false;
+            }
+        }
+
+        public JObject Result(LicenseResponseModel res)
+        {
+            JObject resObj = new JObject();
+            resObj.Add("status_code", res.status_code);
+            resObj.Add("status_description", res.status_Description);
+            return resObj;
+        }
+
+        
     }
 }

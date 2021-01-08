@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
+using License_API.Models.License;
 
 namespace License_API.Models
 {
@@ -18,6 +19,7 @@ namespace License_API.Models
 
         public virtual DbSet<LICENSE_USER> LICENSE_USER { get; set; }
         public virtual DbSet<LICENSE_LOG_HISTORY> LICENSE_LOG_HISTORY { get; set; }
+        public virtual DbSet<LICENSE_CONFIG> LICENSE_CONFIG { get; set; }
 
     }
 }
