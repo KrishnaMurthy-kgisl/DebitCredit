@@ -1,0 +1,121 @@
+[{
+  "_id": {
+    "$oid": "5ff7eab97da76b331072f94f"
+  },
+  "REGID": "19259",
+  "EMPNAME": "KALEESWARAN",
+  "JOBDESCRIPTION": "Project Manager",
+  "SALARY": {
+    "BP": "540000",
+    "HRA": "230000",
+    "ALLOWANCE": "130000"
+  },
+  "DOJ": "12/01/2021",
+  "EMAIL": "kaleswaran.d@kgisl.com",
+  "MOBILE": "9876543210"
+},{
+  "_id": {
+    "$oid": "5ff7eae97da76b331072f950"
+  },
+  "REGID": "19232",
+  "EMPNAME": "BALU",
+  "JOBDESCRIPTION": "Project Manager",
+  "SALARY": {
+    "BP": "530000",
+    "HRA": "235000",
+    "ALLOWANCE": "135000"
+  },
+  "DOJ": "12/01/2021",
+  "EMAIL": "balu@kgisl.com",
+  "MOBILE": "8765432109"
+},{
+  "_id": {
+    "$oid": "5ff7eb3b7da76b331072f951"
+  },
+  "REGID": "19311",
+  "EMPNAME": "RAMANI",
+  "JOBDESCRIPTION": "Senior Associate",
+  "SALARY": {
+    "BP": "430000",
+    "HRA": "135000",
+    "ALLOWANCE": "105000"
+  },
+  "DOJ": "12/01/2021",
+  "EMAIL": "ramani@kgisl.com",
+  "MOBILE": "7654321098"
+},{
+  "_id": {
+    "$oid": "5ff7eb447da76b331072f952"
+  },
+  "REGID": "19359",
+  "EMPNAME": "RAMU",
+  "JOBDESCRIPTION": "Senior Associate",
+  "SALARY": {
+    "BP": "440000",
+    "HRA": "125000",
+    "ALLOWANCE": "105000"
+  },
+  "DOJ": "12/01/2021",
+  "EMAIL": "ramu@kgisl.com",
+  "MOBILE": "6543210987"
+},{
+  "_id": {
+    "$oid": "5ff7eb547da76b331072f953"
+  },
+  "REGID": "18092",
+  "EMPNAME": "SHEIK",
+  "JOBDESCRIPTION": "Associate",
+  "SALARY": {
+    "BP": "390000",
+    "HRA": "105000",
+    "ALLOWANCE": "98000"
+  },
+  "DOJ": "12/01/2021",
+  "EMAIL": "sheik@kgisl.com",
+  "MOBILE": "9543210987"
+},{
+  "_id": {
+    "$oid": "5ff7eb637da76b331072f954"
+  },
+  "REGID": "23954",
+  "EMPNAME": "PRAKASH",
+  "JOBDESCRIPTION": "Associate",
+  "SALARY": {
+    "BP": "360000",
+    "HRA": "95000",
+    "ALLOWANCE": "88000"
+  },
+  "DOJ": "12/01/2021",
+  "EMAIL": "prakash@kgisl.com",
+  "MOBILE": "8543210987"
+},{
+  "_id": {
+    "$oid": "5ff7eb717da76b331072f955"
+  },
+  "REGID": "22357",
+  "EMPNAME": "MANIMEKALAI",
+  "JOBDESCRIPTION": "Junior Associate",
+  "SALARY": {
+    "BP": "320000",
+    "HRA": "85000",
+    "ALLOWANCE": "58000"
+  },
+  "DOJ": "12/01/2021",
+  "EMAIL": "manimekalai@kgisl.com",
+  "MOBILE": "7543210987"
+},{
+  "_id": {
+    "$oid": "5ff7eb817da76b331072f956"
+  },
+  "REGID": "24529",
+  "EMPNAME": "DINESH",
+  "JOBDESCRIPTION": "Junior Associate",
+  "SALARY": {
+    "BP": "300000",
+    "HRA": "55000",
+    "ALLOWANCE": "38000"
+  },
+  "DOJ": "12/01/2021",
+  "EMAIL": "dinesh@kgisl.com",
+  "MOBILE": "6543210987"
+}]
