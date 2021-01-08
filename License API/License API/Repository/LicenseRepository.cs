@@ -15,6 +15,7 @@ namespace License_API.Repository
         public int SessionIntraval;
         public int NoOfLoggins;
         public string ProductKey = string.Empty;
+        public string ISMULTI_lOGGIN = "N";
 
         public LicenseRepository(string l_ProductKey)
         {
@@ -26,12 +27,19 @@ namespace License_API.Repository
                 SessionIntraval = cofig.SESSION_TIME_INTRAVAL;
                 NoOfLoggins = cofig.NUMBER_OF_LOGGING;
                 ProductKey = cofig.PRODUCT_KEY;
+                ISMULTI_lOGGIN = cofig.ISMULTI_lOGGIN;
             }
         }
         public LICENSE_USER GetUser(string loginID)
         {
             LICENSE_USER user = context.LICENSE_USER.Where(w => w.LOGIN_ID == loginID && w.Product_Key == ProductKey).FirstOrDefault();
             return user;
+        }
+
+        //Get All user except current login user
+        public List<LICENSE_LOG_HISTORY> GetAllLoggedUser(LicenseInputModel user)
+        {
+            return context.LICENSE_LOG_HISTORY.Where(r => r.Product_Key == ProductKey && r.LOGOFFTIME == null && user.Login_ID != r.LOGIN_ID).ToList();
         }
 
         public List<LICENSE_LOG_HISTORY> GetAllActiveLoggedUser()

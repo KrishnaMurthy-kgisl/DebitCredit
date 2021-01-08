@@ -154,9 +154,13 @@ namespace License_API.Services
         {
             ErrorMsg = string.Empty;
             List<LICENSE_LOG_HISTORY> lst = new List<LICENSE_LOG_HISTORY>();
-            lst = l_repo.GetAllActiveLoggedUser();
+            lst = l_repo.GetAllLoggedUser(licenseInputModel);
             if (lst.Count < l_repo.LicenseNoOfUsers)
             {
+                if (l_repo.ISMULTI_lOGGIN == "N")
+                {
+                    //neee to check
+                }
                 return true;
             }
             else
