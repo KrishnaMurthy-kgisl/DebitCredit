@@ -244,9 +244,11 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DataBaseContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\LicenseInputModel.cs" />
-    <Compile Include="Models\LICENSE_LOG_HISTORY.cs" />
-    <Compile Include="Models\LICENSE_USER.cs" />
+    <Compile Include="Models\License\LicenseInputModel.cs" />
+    <Compile Include="Models\License\LicenseResponseModel.cs" />
+    <Compile Include="Models\License\LICENSE_CONFIG.cs" />
+    <Compile Include="Models\License\LICENSE_LOG_HISTORY.cs" />
+    <Compile Include="Models\License\LICENSE_USER.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Repository\LicenseRepository.cs" />
@@ -311,10 +313,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

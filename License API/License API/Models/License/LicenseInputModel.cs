@@ -12,5 +12,6 @@ namespace License_API.Models
         public string IPAddress { get; set; }
         public string DeviceType { get; set; }
         public string BrowserInfo { get; set; }
+        public string Product_Key { get; set; }
     }
 }

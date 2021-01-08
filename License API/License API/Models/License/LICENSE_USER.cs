@@ -14,5 +14,6 @@ namespace License_API.Models
         public string LOGIN_ID { get; set; }
         public string PASSWORD { get; set; }
         public string ACTIVESTATUS { get; set; }
+        public string Product_Key { get; set; }
     }
 }

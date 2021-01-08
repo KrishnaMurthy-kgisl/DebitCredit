@@ -16,5 +16,7 @@ namespace License_API.Models
         public string DEVICE_TYPE { get; set; }
         public string BROWSER_INFO { get; set; }
         public Nullable<DateTime> LOGOFFTIME { get; set; }
+        public string Product_Key { get; set; }
+        public DateTime SESSION_RENEW { get; set; }
     }
 }
