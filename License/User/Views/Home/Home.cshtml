@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Welcome @HttpContext.Current.Session["Username"]</h2> 
+<input type="button"
+       value="Go Somewhere Else"
+       onclick="location.href='<%: Url.Action("Action", "Controller" ) %>" />
+
