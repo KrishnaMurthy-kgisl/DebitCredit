@@ -22,11 +22,14 @@ namespace User.Controllers
         {
             if (ModelState.IsValid)
             {
+                string UserName = usr.UserName;
+                
+                HttpContext.Session["Username"] = usr.UserName;
                 string ipAddr = GetIpAddress();
                 string browserDet = GetBrowserDetails();
                 string deviceType = IsMobileDevice(Request.UserAgent) ? "Mobile" : "Machine";
-
-                return RedirectToAction("Home");
+              return  RedirectToRoute(new { controller = "HomePage", action = "HomePage" });
+                //return RedirectToRoute("HomePageController");
             }
             return View(usr);
         }
@@ -39,10 +42,10 @@ namespace User.Controllers
             recaptcha.Response = (new WebClient()).DownloadString(url);
             return Json(recaptcha);
         }
-        public string Home()
-        {
-            return "Home Page";
-        }
+        //public string Home()
+        //{
+        //    return "Home Page";
+        //}
 
         private string GetIpAddress()
         {

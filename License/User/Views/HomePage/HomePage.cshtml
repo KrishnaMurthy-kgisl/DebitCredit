@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "HomePage";
+
+}
+<body  style="background-color:lavender">
+    </body>
+<table width="100%" cellpadding="0px" cellspacing="0px">
+    <tr>
+        <td style="width: 100%">
+            <table class="headtable" cellspacing="0" cellpadding="0" style="width: 99%;">
+                <tr>
+                    <td></td>
+                    <td >
+                       <h2> Welcome @HttpContext.Current.Session["Username"]</h2>
+                    </td>
+                    <td >
+                        <input type="submit" value="Logout" id="btnLogout" class="btn btn-default" />
+                    </td>
+                    </tr>
+                </table>
+            </td></tr></table>
+                                @*<div class="form-group" style="padding-left:300px">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Logout" id="btnLogout" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <h2>Welcome @HttpContext.Current.Session["Username"]</h2>*@
+                    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+                    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+                            async defer></script>
+                    <script type="text/javascript">
+    $(function () {
+        $("#btnLogout").click(function () {
+
+        });
+    });
+                    </script>
