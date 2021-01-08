@@ -1,0 +1,43 @@
+﻿@model OfferLetter.Models.TempMapModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Offer Letter</h2>
+
+<div>
+    <h4>Template Mapping</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Template)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Template)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mappingcolumn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mappingcolumn)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<div style="text-align:end"> @Html.ActionLink("Back To Home", "OfferLetterGeneration", "OfferLetterGeneration")</div>

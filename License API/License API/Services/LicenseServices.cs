@@ -113,12 +113,22 @@ namespace License_API.Services
                 var allUser = l_repo.GetAllActiveLoggedUser();
                 if (allUser != null && allUser.Count > 0)
                 {
-                    return allUser;
+                    return allUser.Select(r => new
+                    {
+                        Login_ID = r.LOGIN_ID,
+                        Password = "",
+                        IPAddress = r.IP_ADDRESS,
+                        DeviceType = r.DEVICE_TYPE,
+                        BrowserInfo = r.BROWSER_INFO,
+                        LogginTime = r.LOGINTIME
+                    });
+                     
                 }
                 else
                 {
-                    response.status_code = "1";
-                    response.status_Description = "No Records";
+                    //response.status_code = "1";
+                    //response.status_Description = "No Records";
+                    return new JArray();
                 }
             }
             else
@@ -127,6 +137,69 @@ namespace License_API.Services
                 response.status_code = "0";
             }
             return Result(response);
+        }
+
+        public object GetAllUser(string Product_Key)
+        {
+            string ErrMsg = string.Empty;
+            l_repo = new LicenseRepository(Product_Key);
+            if (l_repo.ProductKey != "")
+            {
+                var allUser = l_repo.GetAllUser();
+                if (allUser != null && allUser.Count > 0)
+                {
+                    return allUser;
+                }
+                else
+                {
+                    return new JArray();
+                }
+            }
+            else
+            {
+                response.status_Description = "Invalid Product Key";
+                response.status_code = "0";
+            }
+            return Result(response);
+        }
+
+        
+        public object AddUser(LICENSE_USER lICENSE_USER)
+        {
+            l_repo = new LicenseRepository(lICENSE_USER.Product_Key);
+            string ErrMsg = string.Empty;
+            if (l_repo.ProductKey != "")
+            {
+                if (ValidateUser(lICENSE_USER.LOGIN_ID, out ErrMsg))
+                {
+                        l_repo.AddUser(lICENSE_USER);
+                        response.status_Description = "Successfully User Created";
+                        response.status_code = "1";
+                 }
+                else
+                {
+                    response.status_Description = ErrMsg;
+                    response.status_code = "0";
+                }
+            }
+            else
+            {
+                response.status_Description = "Invalid Product Key";
+                response.status_code = "0";
+            }
+            return Result(response);
+        }
+
+        private bool ValidateUser(string loginID, out string ErrorMsg)
+        {
+            LICENSE_USER l_user = l_repo.GetUser(loginID);
+            ErrorMsg = string.Empty;
+            if (l_user != null)
+            {
+                ErrorMsg = "User Name already exists";
+                return false;
+            }
+            return true;
         }
 
         private bool validateCrdential(string loginId, string Password, out string ErrorMsg)

@@ -1,7 +1,97 @@
-﻿
+﻿@model IEnumerable<User.Models.LicenseInputModel>
+
 @{
-    ViewBag.Title = "Concurrent";
+    Layout = null;
 }
 
-<h2>Concurrent</h2>
+<!DOCTYPE html>
+<html>
 
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>View Concurrent Users</title>
+
+</head>
+<body style="background-color:lavender">
+
+    <div style="font-family:Arial">
+        <table width="100%">
+            <tr>
+                <td width="100%">
+                    <h2 style="color:darkblue"><i><b> Concurrent Users List</b></i></h2>
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td width="100%">
+                    <table width="100%">
+                        <tr>
+                            <td width="20%"></td>
+                            <td width="60%">
+
+
+                                <table class="table" width="100%" style="background-color:aquamarine; border:double">
+                                    <tr>
+                                        <th width="10%">
+                                            @Html.DisplayNameFor(model => model.Login_ID)
+                                        </th>
+                                        <th width="60%" hidden="hidden">
+                                            @Html.DisplayNameFor(model => model.Password)
+                                        </th>
+                                        <th width="10%">
+                                            @Html.DisplayNameFor(model => model.IPAddress)
+                                        </th>
+                                        <th width="10%">
+                                            @Html.DisplayNameFor(model => model.DeviceType)
+                                        </th>
+                                        <th width="10%">
+                                            @Html.DisplayNameFor(model => model.BrowserInfo)
+                                        </th>
+                                    </tr>
+
+                                    @foreach (var item in Model)
+            {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Login_ID)
+                                            </td>
+                                            <td hidden="hidden">
+                                                @Html.DisplayFor(modelItem => item.Password)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.IPAddress)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DeviceType)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.BrowserInfo)
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+                            </td>
+                            <td width="20%"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        @Html.ActionLink("Back to Home", "Index", "User")
+                    </div>
+                    <br />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

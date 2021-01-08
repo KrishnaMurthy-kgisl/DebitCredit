@@ -1,0 +1,100 @@
+﻿@model IEnumerable<User.Models.LICENSE_USER>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewUsers</title>
+</head>
+<body style="background-color:lavender">
+
+    <div style="font-family:Arial">
+        <table width="100%">
+            <tr>
+                <td width="100%">
+                    <h2 style="color:darkblue"><i><b>Users List</b></i></h2>
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td width="100%">
+                    <table width="100%">
+                        <tr>
+                            <td width="30%"></td>
+                            <td width="40%">
+
+
+                                <table class="table" width="100%" style="background-color:aquamarine; border:double">
+                                    <tr>
+                                        <th hidden="hidden" width="65%">
+                                            @Html.DisplayNameFor(model => model.USERID)
+                                        </th>
+                                        <th width="10%">
+                                            @Html.DisplayNameFor(model => model.USER_NAME)
+                                        </th>
+                                        <th width="10%">
+                                            @Html.DisplayNameFor(model => model.LOGIN_ID)
+                                        </th>
+                                        <th hidden="hidden" width="5%">
+                                            @Html.DisplayNameFor(model => model.PASSWORD)
+                                        </th>
+                                        <th hidden="hidden" width="5%">
+                                            @Html.DisplayNameFor(model => model.ACTIVESTATUS)
+                                        </th>
+                                    </tr>
+
+                                    @foreach (var item in Model)
+            {
+                                        <tr>
+                                            <td hidden="hidden">
+                                                @Html.HiddenFor(modelItem => item.USERID)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.USER_NAME)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.LOGIN_ID)
+                                            </td>
+                                            <td hidden="hidden">
+                                                @Html.DisplayFor(modelItem => item.PASSWORD)
+                                            </td>
+                                            <td hidden="hidden">
+                                                @Html.DisplayFor(modelItem => item.ACTIVESTATUS)
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </table>
+
+                            </td>
+                            <td width="30%"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>
+
+
+                    <div>
+                        @Html.ActionLink("Back to Home", "Index")  |
+
+                        @Html.ActionLink("Create New", "Create")
+                    </div>
+                    <br />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

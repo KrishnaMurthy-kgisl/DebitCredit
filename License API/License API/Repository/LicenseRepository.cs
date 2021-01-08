@@ -42,6 +42,25 @@ namespace License_API.Repository
             return context.LICENSE_LOG_HISTORY.Where(r => r.Product_Key == ProductKey && r.LOGOFFTIME == null && user.Login_ID != r.LOGIN_ID).ToList();
         }
 
+        public bool AddUser(LICENSE_USER user)
+        {
+            LICENSE_USER l_logHistory = new LICENSE_USER();
+            l_logHistory.LOGIN_ID = user.LOGIN_ID;
+            l_logHistory.PASSWORD = user.PASSWORD;
+            l_logHistory.Product_Key = user.Product_Key;
+            l_logHistory.ACTIVESTATUS = "Y";
+            l_logHistory.USER_NAME = user.USER_NAME;
+            context.LICENSE_USER.Add(l_logHistory);
+            context.Entry(l_logHistory).State = EntityState.Added;
+            context.SaveChanges();
+            return true;
+        }
+
+        public List<LICENSE_USER> GetAllUser()
+        {
+            return context.LICENSE_USER.Where(r => r.Product_Key == ProductKey && r.ACTIVESTATUS == "Y").ToList();
+        }
+
         public List<LICENSE_LOG_HISTORY> GetAllActiveLoggedUser()
         {
             return context.LICENSE_LOG_HISTORY.Where(r => r.Product_Key == ProductKey && r.LOGOFFTIME == null).ToList();

@@ -46,10 +46,26 @@ namespace License_API.Controllers
         }
 
         [HttpGet]
-        [Route("GetAllLggedUser")]
+        [Route("GetAllLoggedUser")]
         public object GetAllLggedUser(string ProductKey)
         {
             var result = l_services.GetAllLggedUser(ProductKey);
+            return result;
+        }
+
+        [HttpPost]
+        [Route("AddUser")]
+        public object AddUser([FromBody] LICENSE_USER lICENSE_USER)
+        {
+            var result = l_services.AddUser(lICENSE_USER);
+            return result;
+        }
+
+        [HttpGet]
+        [Route("GetAllUser")]
+        public object GetAllUser(string ProductKey)
+        {
+            var result = l_services.GetAllUser(ProductKey);
             return result;
         }
 

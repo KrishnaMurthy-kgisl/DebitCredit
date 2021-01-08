@@ -15,5 +15,7 @@ namespace User.Models
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
+        public string ErrMsg { get; set; }
+
     }
 }

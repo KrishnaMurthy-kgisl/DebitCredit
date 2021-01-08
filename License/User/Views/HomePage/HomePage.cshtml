@@ -1,38 +1,87 @@
-﻿
+﻿@model User.Models.LicenseInputModel
 @{
     ViewBag.Title = "HomePage";
 
 }
-<body  style="background-color:lavender">
-    </body>
-<table width="100%" cellpadding="0px" cellspacing="0px">
-    <tr>
-        <td style="width: 100%">
-            <table class="headtable" cellspacing="0" cellpadding="0" style="width: 99%;">
-                <tr>
-                    <td></td>
-                    <td >
-                       <h2> Welcome @HttpContext.Current.Session["Username"]</h2>
-                    </td>
-                    <td >
-                        <input type="submit" value="Logout" id="btnLogout" class="btn btn-default" />
-                    </td>
-                    </tr>
-                </table>
-            </td></tr></table>
-                                @*<div class="form-group" style="padding-left:300px">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Logout" id="btnLogout" class="btn btn-default" />
-                        </div>
-                    </div>
-                    <h2>Welcome @HttpContext.Current.Session["Username"]</h2>*@
-                    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-                    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-                            async defer></script>
-                    <script type="text/javascript">
-    $(function () {
-        $("#btnLogout").click(function () {
+<body style="background-color:lavender">
+    @using (Html.BeginForm())
+    {
+        <table width="100%" cellpadding="0px" cellspacing="0px">
+            <tr>
+                <td style="width: 100%">
+                    <table class="headtable" cellspacing="0" cellpadding="0" style="width: 99%;">
+                        <tr>
+                            <td></td>
+                            <td>
+                                <h3> Welcome @HttpContext.Current.Session["Username"]</h3>
+                            </td>
+                            <td align="right">
+                                <input type="submit" value="Logout" id="btnLogout" class="btn btn-default" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td><br /></td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Login_ID)
+                            </dt>
 
-        });
-    });
-                    </script>
+                            <dd>
+                                @Html.DisplayFor(model => model.Login_ID)
+                            </dd>
+
+                            @*<dt>
+                                    @Html.DisplayNameFor(model => model.Password)
+                                </dt>
+
+                                <dd>
+                                    @Html.HiddenFor(model => model.Password)
+                                </dd>*@
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.IPAddress)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.IPAddress)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.DeviceType)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.DeviceType)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.BrowserInfo)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.BrowserInfo)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Product_Key)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Product_Key)
+                            </dd>
+
+                        </dl>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    }
+</body>
+
